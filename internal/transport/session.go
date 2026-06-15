@@ -33,21 +33,15 @@ func (s *Session) Initialize(ctx context.Context) error {
 		return err
 	}
 
+	// Session setup
 	sessionID := resp.Headers.Get("Mcp-Session-Id")
 	if sessionID == "" {
 		sessionID = resp.Headers.Get("MCP-Session-Id")
 	}
-
 	if sessionID == "" {
 		return fmt.Errorf("server did not return session id")
 	}
-
 	s.SessionID = sessionID
-
-	fmt.Println("HEADERS")
-	fmt.Println(resp.Headers)
-	fmt.Println("BODY")
-	fmt.Println(string(resp.Body))
 
 	payload, err := common.ExtractSSEData(resp.Body)
 	if err != nil {
@@ -56,7 +50,6 @@ func (s *Session) Initialize(ctx context.Context) error {
 
 	var parsed map[string]any
 	if err := json.Unmarshal(payload, &parsed); err != nil {
-		fmt.Println("Marshalling error")
 		return err
 	}
 

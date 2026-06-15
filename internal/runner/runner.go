@@ -1,10 +1,13 @@
 package runner
 
 import (
+	"bytes"
 	"context"
+	"encoding/json"
 	"fmt"
 	"net/http"
 
+	"github.com/IAmRiteshKoushik/smriti/internal/common"
 	"github.com/IAmRiteshKoushik/smriti/internal/mcp"
 	"github.com/IAmRiteshKoushik/smriti/internal/scenario"
 	"github.com/IAmRiteshKoushik/smriti/internal/server"
@@ -47,12 +50,12 @@ func RunScenario(ctx context.Context, serverCfg server.Server, scenarioPath stri
 	if err != nil {
 		return err
 	}
-	fmt.Println(string(resp))
 
-	// var pretty bytes.Buffer
-	// _ = json.Indent(&pretty, resp, "", " ") // unhandled error
-	//
-	// fmt.Println(pretty.String())
+	data, _ := common.ExtractSSEData(resp)
+	var pretty bytes.Buffer
+	_ = json.Indent(&pretty, data, "", " ") // unhandled error
+
+	fmt.Println(pretty.String())
 
 	return nil
 }
