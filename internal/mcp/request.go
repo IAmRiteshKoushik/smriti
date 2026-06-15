@@ -30,7 +30,7 @@ func BuildRequest(s *scenario.Scenario) (*Request, error) {
 		return &Request{
 			JSONRPC: "2.0",
 			ID:      1,
-			Method:  "tools/list",
+			Method:  "tools/call",
 			Params: ToolCallParams{
 				Name:      s.Tool,
 				Arguments: s.Arguments,
