@@ -20,7 +20,9 @@ var runCmd = &cobra.Command{
 			return fmt.Errorf("scenario path required")
 		}
 
-		ws, err := workspace.Load(".")
+		// FIXME: Temporary solution
+		root := "testbench/basic-workspace"
+		ws, err := workspace.Load(root)
 		if err != nil {
 			return err
 		}

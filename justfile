@@ -1,21 +1,18 @@
-testing_dir := "testdata/basic-workspace/scenarios/tools/list.toml"
+testing_dir := "testbench/basic-workspace/scenarios/tools/list.toml"
 
-[group("helpers")]
+[group("aux")]
 list:
   @just --list
 
-[group("main")]
+[group("build")]
 build:
   @go build -o ./bin/smriti .
 
-[group("main")]
-go cmd:
-  @./bin/smriti {{cmd}}
-
 [group("cli")]
-run path:
-  @./bin/smriti run {{path}}
+run testfile:
+  @./bin/smriti run {{testfile}}
 
+# Not implemented!
 [group("cli")]
 discover:
   @./bin/smriti discover
@@ -23,3 +20,13 @@ discover:
 [group("cli")]
 version:
   @./bin/smriti version
+
+# Not implemented!
+[group("cli")]
+servers:
+  @./bin/smriti servers
+
+# Not implemented!
+[group("cli")]
+scenarios:
+  @./bin/smriti scenarios

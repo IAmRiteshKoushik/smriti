@@ -1,9 +1,3 @@
-name = "Search repositories"
-description = "Search repositories on GitHub"
+name = "Basic workspace"
 
-request_type = "tools/call"
-tool = "search_repositories"
-
-[arguemnts]
-query = "golang"
-language = "go"
+default_server = "local"
