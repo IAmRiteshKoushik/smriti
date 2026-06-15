@@ -1,0 +1,4 @@
+name = "Local MCP Testing"
+
+default_server = "local"
+default_env = "dev"

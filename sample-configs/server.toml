@@ -1,0 +1,9 @@
+name = "local"
+
+[transport]
+type = "streamable-http"
+url = "http://localhost:8080/mcp"/ TOOD
+
+[headers]
+Authorization = "Bearer abc123"
+X-Client = "smriti"

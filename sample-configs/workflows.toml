@@ -1,0 +1,11 @@
+name = "Repository Workflow"
+
+[[steps]]
+request_type = "tools/list"
+
+[[steps]]
+request_type = "tools/call"
+tool = "search"
+
+[steps.arguments]
+query = "golang"

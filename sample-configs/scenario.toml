@@ -1,0 +1,11 @@
+name = "Create User"
+
+request_type = "tools/call"
+tool = "create_user"
+
+[arguments]
+name = "John"
+
+[arguments.address]
+city = "Mumbai"
+country = "India"
