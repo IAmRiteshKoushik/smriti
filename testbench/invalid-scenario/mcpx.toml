@@ -1,0 +1,9 @@
+name = "Search repositories"
+description = "Search repositories on GitHub"
+
+request_type = "tools/call"
+tool = "search_repositories"
+
+[arguemnts]
+query = "golang"
+language = "go"
