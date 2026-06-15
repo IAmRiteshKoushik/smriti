@@ -1,4 +1,5 @@
 name = "Get Beneficiaries"
 
+server = "local"
 request_type = "tools/call"
 tool = "get_beneficiaries"

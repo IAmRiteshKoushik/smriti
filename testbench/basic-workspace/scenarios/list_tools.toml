@@ -1,3 +1,5 @@
 name = "List Available Tools"
 
+server = "local"
+
 request_type = "tools/list"

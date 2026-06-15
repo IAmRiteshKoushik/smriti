@@ -1,4 +1,5 @@
 name = "Get Accounts"
 
+server = "local"
 request_type = "tools/call"
 tool = "get_accounts"

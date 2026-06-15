@@ -1,5 +1,6 @@
 name = "Get Account Balance"
 
+server = "local"
 request_type = "tools/call"
 tool = "get_account_balance"
 
