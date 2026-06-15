@@ -1,0 +1,7 @@
+name = "Get Account Balance"
+
+request_type = "tools/call"
+tool = "get_account_balance"
+
+[arguments]
+account_id = "123456"

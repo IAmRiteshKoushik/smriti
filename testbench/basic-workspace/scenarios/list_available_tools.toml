@@ -1,0 +1,3 @@
+name = "List Available Tools"
+
+request_type = "tools/list"

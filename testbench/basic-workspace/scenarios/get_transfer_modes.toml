@@ -1,0 +1,4 @@
+name = "Get Transfer Modes"
+
+request_type = "tools/call"
+tool = "get_transfer_modes"

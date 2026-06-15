@@ -1,0 +1,4 @@
+name = "Get All Balances"
+
+request_type = "tools/call"
+tool = "get_all_balances"
