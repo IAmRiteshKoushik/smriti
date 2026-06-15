@@ -6,8 +6,6 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
-
-	"github.com/IAmRiteshKoushik/smriti/internal/mcp"
 )
 
 type Client struct {
@@ -16,28 +14,47 @@ type Client struct {
 	HTTP    *http.Client
 }
 
-func (c *Client) Send(ctx context.Context, req *mcp.Request) ([]byte, error) {
-	payload, err := json.Marshal(req)
+type Response struct {
+	StatusCode int
+	Headers    http.Header
+	Body       []byte
+}
+
+func (c *Client) Send(ctx context.Context, payload any, sessionID string) (*Response, error) {
+	data, err := json.Marshal(payload)
 	if err != nil {
 		return nil, err
 	}
 
-	httpReq, err := http.NewRequestWithContext(ctx, http.MethodPost, c.URL, bytes.NewReader(payload))
+	httpReq, err := http.NewRequestWithContext(ctx, http.MethodPost, c.URL, bytes.NewReader(data))
 	if err != nil {
 		return nil, err
 	}
 	httpReq.Header.Set("Content-Type", "application/json")
 	httpReq.Header.Set("Accept", "application/json, text/event-stream")
 
+	if sessionID != "" {
+		httpReq.Header.Set("Mcp-Session-Id", sessionID)
+	}
+
 	for k, v := range c.Headers {
 		httpReq.Header.Set(k, v)
 	}
 
-	resp, err := c.HTTP.Do(httpReq)
+	httpResp, err := c.HTTP.Do(httpReq)
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer httpResp.Body.Close()
 
-	return io.ReadAll(resp.Body)
+	body, err := io.ReadAll(httpResp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	return &Response{
+		StatusCode: httpResp.StatusCode,
+		Headers:    httpResp.Header,
+		Body:       body,
+	}, nil
 }

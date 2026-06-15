@@ -21,21 +21,34 @@ func RunScenario(ctx context.Context, serverCfg server.Server, scenarioPath stri
 		return err
 	}
 
+	// Request building
 	req, err := mcp.BuildRequest(sc)
 	if err != nil {
 		return err
 	}
 
+	// Client and session building
 	client := &transport.Client{
 		URL:     serverCfg.Transport.URL,
 		Headers: serverCfg.Headers,
 		HTTP:    http.DefaultClient,
 	}
+	session := &transport.Session{
+		Client: client,
+	}
 
-	resp, err := client.Send(ctx, req)
+	// Initialize session
+	if err := session.Initialize(ctx); err != nil {
+		fmt.Println("Error is happening at session initialization")
+		return err
+	}
+
+	// Execute request after setting up session
+	resp, err := session.Execute(ctx, req)
 	if err != nil {
 		return err
 	}
+
 	fmt.Println(string(resp))
 
 	return nil
