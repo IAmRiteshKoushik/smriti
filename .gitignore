@@ -40,3 +40,6 @@ go.work
 # Local environment variables
 .env
 .env.local
+
+# Database specific
+*.db
