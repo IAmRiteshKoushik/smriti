@@ -39,7 +39,7 @@ func Load(root string) (*LoadedWorkspace, error) {
 		Servers:   make(map[string]server.Server),
 	}
 
-	files, err := filepath.Glob(filepath.Join(root, "servers", ".toml"))
+	files, err := filepath.Glob(filepath.Join(root, "servers", "*.toml"))
 	if err != nil {
 		return nil, err
 	}

@@ -27,6 +27,7 @@ func (c *Client) Send(ctx context.Context, req *mcp.Request) ([]byte, error) {
 		return nil, err
 	}
 	httpReq.Header.Set("Content-Type", "application/json")
+	httpReq.Header.Set("Accept", "application/json, text/event-stream")
 
 	for k, v := range c.Headers {
 		httpReq.Header.Set(k, v)
