@@ -4,6 +4,8 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+
+	"github.com/IAmRiteshKoushik/smriti/internal/common"
 )
 
 type Session struct {
@@ -42,8 +44,19 @@ func (s *Session) Initialize(ctx context.Context) error {
 
 	s.SessionID = sessionID
 
+	fmt.Println("HEADERS")
+	fmt.Println(resp.Headers)
+	fmt.Println("BODY")
+	fmt.Println(string(resp.Body))
+
+	payload, err := common.ExtractSSEData(resp.Body)
+	if err != nil {
+		return err
+	}
+
 	var parsed map[string]any
-	if err := json.Unmarshal(resp.Body, &parsed); err != nil {
+	if err := json.Unmarshal(payload, &parsed); err != nil {
+		fmt.Println("Marshalling error")
 		return err
 	}
 

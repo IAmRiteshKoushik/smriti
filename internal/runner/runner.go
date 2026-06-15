@@ -39,7 +39,6 @@ func RunScenario(ctx context.Context, serverCfg server.Server, scenarioPath stri
 
 	// Initialize session
 	if err := session.Initialize(ctx); err != nil {
-		fmt.Println("Error is happening at session initialization")
 		return err
 	}
 
@@ -48,8 +47,12 @@ func RunScenario(ctx context.Context, serverCfg server.Server, scenarioPath stri
 	if err != nil {
 		return err
 	}
-
 	fmt.Println(string(resp))
+
+	// var pretty bytes.Buffer
+	// _ = json.Indent(&pretty, resp, "", " ") // unhandled error
+	//
+	// fmt.Println(pretty.String())
 
 	return nil
 }
