@@ -7,10 +7,10 @@ import (
 )
 
 type Request struct {
-	JSONRPC string         `json:"jsonrpc"`
-	ID      int            `json:"id"`
-	Method  string         `json:"method"`
-	Params  ToolCallParams `json:"params"`
+	JSONRPC string `json:"jsonrpc"`
+	ID      int    `json:"id"`
+	Method  string `json:"method"`
+	Params  any    `json:"params"`
 }
 
 type ToolCallParams struct {
